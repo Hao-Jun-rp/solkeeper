@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolKeeper — Junior Astronaut Mission Trainer</title>
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+  <header class="hud-bar">
+    <div class="brand">🚀 <strong>SolKeeper</strong> <span class="badge">NASA / CSA Trainer</span></div>
+    <div id="hud-status" class="hud-stats hidden">
+      <span>Location: <strong id="hud-location">Mars</strong></span>
+      <span>Sol: <strong id="hud-sol">1 / 10</strong></span>
+      <span>Available Power: <strong id="hud-power">100</strong> kW</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- SCREEN 1: MISSION SELECT -->
+    <section id="start-screen" class="card center-card">
+      <h1>Welcome, Junior Commander!</h1>
+      <p>Keep your space outpost alive for <strong>10 Sols</strong> by balancing power between Life Support, Food Production, and Radiation Shielding.</p>
+      <div class="preset-grid">
+        <button id="btn-start-mars" class="btn btn-primary">
+          🔴 Launch Mars Outpost<br /><small>Jezero Crater • Dust Storms &amp; Solar Flares</small>
+        </button>
+        <button id="btn-start-moon" class="btn btn-secondary">
+          🌕 Launch Lunar Base<br /><small>Shackleton Crater • Lunar Nights &amp; Ice Mining</small>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: MISSION CONTROL DASHBOARD -->
+    <section id="game-screen" class="hidden">
+      <!-- Live Alert & NASA/CSA Science Banner -->
+      <div id="event-banner" class="alert-box">
+        <h3 id="event-title">Systems Nominal</h3>
+        <p id="event-desc">All outpost systems are ready for your power allocation orders.</p>
+        <p id="event-fact" class="science-fact"></p>
+      </div>
+
+      <!-- 4 Core Outpost Resources -->
+      <div class="grid-4">
+        <div class="card stat-card">
+          <div class="stat-header"><span>🫧 Oxygen</span><strong id="val-oxygen">80%</strong></div>
+          <div class="progress-track"><div id="bar-oxygen" class="progress-fill" style="width: 80%"></div></div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-header"><span>💧 Water</span><strong id="val-water">80%</strong></div>
+          <div class="progress-track"><div id="bar-water" class="progress-fill" style="width: 80%"></div></div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-header"><span>🌱 Food</span><strong id="val-food">75%</strong></div>
+          <div class="progress-track"><div id="bar-food" class="progress-fill" style="width: 75%"></div></div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-header"><span>🛡️ Shielding</span><strong id="val-shielding">70%</strong></div>
+          <div class="progress-track"><div id="bar-shielding" class="progress-fill" style="width: 70%"></div></div>
+        </div>
+      </div>
+
+      <!-- Power Allocation Controls -->
+      <div class="card controls-card">
+        <div class="controls-header">
+          <h2>⚡ Power Grid Allocation</h2>
+          <p>Remaining Unallocated Power: <strong id="power-remaining">10</strong> kW</p>
+        </div>
+
+        <div class="slider-group">
+          <label for="slider-life">🫧 Life Support &amp; Water Recycling: <strong id="lbl-life">30</strong> kW</label>
+          <input type="range" id="slider-life" min="0" max="100" step="5" value="30" />
+        </div>
+
+        <div class="slider-group">
+          <label for="slider-greenhouse">🌱 Hydroponic Greenhouse: <strong id="lbl-greenhouse">30</strong> kW</label>
+          <input type="range" id="slider-greenhouse" min="0" max="100" step="5" value="30" />
+        </div>
+
+        <div class="slider-group">
+          <label for="slider-shielding">🛡️ Active Radiation Shielding: <strong id="lbl-shielding">30</strong> kW</label>
+          <input type="range" id="slider-shielding" min="0" max="100" step="5" value="30" />
+        </div>
+
+        <button id="btn-next-sol" class="btn btn-primary btn-large">Advance to Next Sol ⏭️</button>
+      </div>
+    </section>
+
+    <!-- MODAL: MISSION OUTCOME & AFTER-ACTION ENGINEERING REPORT -->
+    <div id="outcome-modal" class="modal-backdrop hidden">
+      <div class="card modal-card">
+        <h2 id="modal-title">Mission Complete!</h2>
+        <p id="modal-body"></p>
+        <div id="modal-science" class="science-fact"></div>
+        <button id="btn-restart" class="btn btn-primary">Play Another Mission 🔄</button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

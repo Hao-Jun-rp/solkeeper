@@ -1,4 +1,4 @@
-🚀 Junior Astronaut Mission Trainer (2026 NASA Space Apps)
+🚀 solkeeper (2026 NASA Space Apps)
 
 🔗 Live app: [Add your GitHub Pages / Vercel / Netlify link here]
 
@@ -15,8 +15,8 @@ Want to run it on your own machine? Keep reading below.
 You only need Git and any modern web browser (Chrome, Edge, Safari, Firefox). No Python, Node, or database installation is required.
 
 # 1. Get the code
-git clone https://github.com/Hao-Jun-rp/junior-astronaut-trainer.git
-cd junior-astronaut-trainer
+git clone https://github.com/Hao-Jun-rp/solkeeper.git
+cd solkeeper
 
 
 3. Run the app
@@ -61,7 +61,7 @@ Closed-Loop Life Support: Derived from NASA ECLSS (Environmental Control and Lif
 
 5. Who owns what (folder map)
 
-junior-astronaut-trainer/
+solkeeper/
 ├── index.html                  ← Hao Jun (Mission Control HUD, sliders & modals)
 ├── css/
 │   └── theme.css               ← Hao Jun (Design system variables, cards & bars)
@@ -112,7 +112,7 @@ Go to your repository Settings → Pages.
 
 Under Build and deployment, select Deploy from a branch → main → / (root) and click Save.
 
-Your live HTTPS URL (https://hao-jun-rp.github.io/junior-astronaut-trainer/) goes live within ~60 seconds.
+Your live HTTPS URL (https://hao-jun-rp.github.io/solkeeper/) goes live within ~60 seconds.
 
 8. The golden rules (keeps merges smooth)
 

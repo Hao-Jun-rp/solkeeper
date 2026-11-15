@@ -1,140 +1,58 @@
-🚀 solkeeper (2026 NASA Space Apps)
+# 🚀 SolKeeper — Junior Astronaut Mission Trainer
 
-🔗 Live app: [Add your GitHub Pages / Vercel / Netlify link here]
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Render_Static_Site-38bdf8?style=for-the-badge)](https://solkeeper.onrender.com)
+[![Challenge](https://img.shields.io/badge/NASA_Space_Apps_2026-Junior_Astronaut_Mission_Trainer-0b1021?style=for-the-badge)](https://www.spaceappschallenge.org/)
 
-A lightweight, zero-backend web application built with Vanilla HTML5, CSS3, and ES6+ JavaScript for the 2026 NASA Space Apps Challenge (Build a Junior Astronaut Mission Trainer). Each teammate owns an isolated set of files (ui/ vs. simulation/) so you can build in parallel without Git merge conflicts; this README explains how the whole thing fits together and how to run it yourself.
+**Play Live:** https://solkeeper.onrender.com  
+**Source Code:** https://github.com/Hao-Jun-rp/solkeeper
 
-1. See it live, or run it locally
+---
 
-Just want to play it? Visit [Your Live App URL] — no login, installation, or server needed. Kids (ages 7–12) and judges can launch a Lunar or Martian outpost mission directly in their browser.
+## 🌌 Overview
+**SolKeeper** is an interactive, zero-login browser simulation built for students ages **7–12** to experience the real engineering trade-offs of managing a Lunar or Martian outpost. Rather than simplifying spaceflight into trivia, players act as Mission Commanders across a **10-Sol mission**, balancing a limited kilowatt power budget between competing life-support systems while responding to real-world space weather and astronaut nutrition hazards.
 
-Want to run it on your own machine? Keep reading below.
+### Core Gameplay & Engineering Trade-Offs
+* **Two Authentic Mission Sites:** Launch into **Mars (Jezero Crater)** or the **Moon (Shackleton Crater)**, each with distinct power budgets and environmental pressures.
+* **Interconnected Resource Management:** Distribute power every Sol across **Life Support & Water Recycling**, **Hydroponic Food Production**, and **Active Radiation Shielding**. Over-allocating power to crops consumes extra water, while under-powering shielding leaves the crew exposed during solar storms.
+* **Constructive After-Action Engineering Reports:** If any vital resource (Oxygen, Water, Food, or Shielding) depletes, the simulator generates a kid-friendly engineering breakdown explaining the physics behind what went wrong and how to adjust strategy on the next run.
 
-2. One-time setup (do this once on your laptop)
+---
 
-You only need Git and any modern web browser (Chrome, Edge, Safari, Firefox). No Python, Node, or database installation is required.
+## 🛰️ NASA & Space Agency Partner Data Used
+* **NASA Space Weather Database (DONKI):** Fetches recent solar flare telemetry (`FLR`) from `https://api.nasa.gov/DONKI/FLR` (with `sessionStorage` caching and an offline archive fallback) to trigger radiation shielding emergencies during missions.
+* **Canadian Space Agency (CSA) — Food Production on the Moon Toolkit:** Grounds the closed-loop hydroponic water-to-crop mechanics and space nutrition hazard cards (such as floating crumbs clogging air filters and microgravity "space congestion" affecting crew appetite).
+* **NASA Curiosity (REMS) & Lunar Reconnaissance Orbiter (LRO):** Informs baseline environmental constraints for Martian dust storm solar-power drops and Lunar South Pole operations.
 
-# 1. Get the code
-git clone https://github.com/Hao-Jun-rp/solkeeper.git
-cd solkeeper
+---
 
+## 🗂️ Project Architecture
+Built with zero external frameworks or build steps for instant browser accessibility:
 
-3. Run the app
+    solkeeper/
+    ├── index.html                   # Mission Control UI, resource bars & outcome modals
+    ├── css/
+    │   └── theme.css                # Responsive dark-space HUD styling & alert states
+    └── js/
+        ├── config.example.js        # Public template for optional personal NASA API key
+        ├── main.js                  # Entry point, slider power-cap logic & event listeners
+        ├── simulation/
+        │   ├── nasaData.js          # Cached NASA DONKI API integration & CSA hazard deck
+        │   └── engine.js            # 10-Sol resource simulation math & failure diagnostics
+        └── ui/
+            └── renderer.js          # DOM updates for progress bars, alerts & modals
 
-Because this project uses ES6 JavaScript modules (type="module"), open it through a local static server rather than double-clicking index.html:
+---
 
-Option A (VS Code — Easiest): Install the Live Server extension, right-click index.html, and click "Open with Live Server".
+## 💻 Running Locally
+Because **SolKeeper** uses native ES6 JavaScript modules (`type="module"`), serve the root directory with any local static web server:
 
-Option B (Python one-liner):
+    git clone https://github.com/Hao-Jun-rp/solkeeper.git
+    cd solkeeper
+    python -m http.server 8000
 
-python -m http.server 8000
+Open `http://localhost:8000` in your browser. *(Optional: Copy `js/config.example.js` to `js/config.js` to add a personal key from https://api.nasa.gov/; otherwise, it defaults to `DEMO_KEY` with session caching.)*
 
-
-Then open http://localhost:8000 in your browser.
-
-Option C (Node one-liner):
-
-npx serve .
-
-
-Try Select Outpost (Mars or Moon) → Adjust Power Sliders → Advance Sol — the full 10-Sol simulation loop works end-to-end, including space weather alerts and After-Action Engineering Reports.
-
-4. What the app does & NASA scientific grounding
-
-Junior Astronaut Mission Trainer is an interactive outpost simulator teaching students ages 7–12 the real engineering trade-offs of living on the Moon and Mars. Instead of trivia, players act as Mission Commanders balancing Power, Life Support (Oxygen & Water), Food, and Radiation Shielding across a 10-Sol mission:
-
-Tangible Trade-Offs: Allocating power to greenhouses or oxygen recyclers reduces energy available for active radiation shielding during solar storms.
-
-Dynamic Space Weather: Randomized hazards (Martian global dust storms, solar particle events, micrometeorites) force players to adapt their resource budgets on the fly.
-
-Constructive Failure Reports: If a resource hits 0%, players receive a kid-friendly engineering breakdown explaining the physics behind what failed and how to improve on their next attempt.
-
-Traceable NASA Datasets (js/simulation/nasaData.js)
-
-All environmental parameters and hazard probabilities are grounded in real NASA mission data:
-
-Mars Surface (Jezero / Gale Crater): Derived from NASA Mars Science Laboratory (Curiosity) — REMS (temperature swings, dust opacity drops in solar efficiency) and RAD (surface radiation baselines).
-
-Lunar South Pole (Shackleton Crater): Derived from NASA Lunar Reconnaissance Orbiter (LRO) — Diviner thermal illumination cycles and battery storage trade-offs.
-
-Closed-Loop Life Support: Derived from NASA ECLSS (Environmental Control and Life Support System) water/oxygen recovery ratios.
-
-5. Who owns what (folder map)
-
-solkeeper/
-├── index.html                  ← Hao Jun (Mission Control HUD, sliders & modals)
-├── css/
-│   └── theme.css               ← Hao Jun (Design system variables, cards & bars)
-├── js/
-│   ├── main.js                 ← SHARED  (Wires HTML buttons/sliders to engine)
-│   ├── ui/
-│   │   └── renderer.js         ← Hao Jun (Updates resource bars, alerts & modals)
-│   └── simulation/
-│       ├── engine.js           ← Teammate (10-Sol math, hazards & failure reports)
-│       └── nasaData.js         ← Teammate (Curated NASA mission stats & citations)
-└── README.md                   ← Documentation & NASA data sources
-
-
-Work inside your own folder. js/ui/ only handles DOM rendering, while js/simulation/ only handles pure JavaScript math and NASA data.
-
-6. Shared State Contract (engine.js → renderer.js)
-
-Both folders communicate through one plain JavaScript object returned by advanceSol() so UI and simulation logic can be developed independently:
-
-{
-  outpostKey: "mars",
-  outpostName: "Mars — Jezero Crater",
-  sol: 3,
-  maxSols: 10,
-  powerAvailable: 100,
-  resources: {
-    oxygen: 85,     // 0 to 100%
-    water: 75,      // 0 to 100%
-    food: 80,       // 0 to 100%
-    shielding: 70   // 0 to 100%
-  },
-  event: {
-    title: "Martian Dust Storm",
-    description: "Dust is blocking sunlight! Solar power dropped to 60 units.",
-    nasaFact: "NASA's Curiosity rover measured dust storms cutting solar energy by over 60%.",
-    severity: "warning" // "normal" | "warning" | "danger"
-  },
-  status: "ACTIVE", // "ACTIVE" | "WON" | "LOST"
-  failureReport: null
-}
-
-
-7. Deployment (30 Seconds on GitHub Pages)
-
-Push your code to the main branch on GitHub.
-
-Go to your repository Settings → Pages.
-
-Under Build and deployment, select Deploy from a branch → main → / (root) and click Save.
-
-Your live HTTPS URL (https://hao-jun-rp.github.io/solkeeper/) goes live within ~60 seconds.
-
-8. The golden rules (keeps merges smooth)
-
-Only edit your own files (index.html, css/, js/ui/ vs. js/simulation/).
-
-Coordinate before editing js/main.js. Keep main.js thin—just event listeners connecting renderer.js and engine.js.
-
-Always start work on a fresh branch:
-
-git checkout main
-git pull origin main
-git checkout -b feature/<your-feature>
-
-
-Use the design system. Style with CSS variables in css/theme.css (var(--color-primary), var(--color-danger)) instead of hard-coding hex colors.
-
-9. Daily flow (memorise this)
-
-pull main  →  make a branch  →  build in your folder  →  commit  →  push  →  open a Pull Request
-
-
-Happy building, Commander! 🚀
+---
 
 ## 🤖 Use of Super Intelligence (SI) Disclosure
-In accordance with NASA Space Apps guidelines, generative AI (Gemini) was used as a development assistant to help scaffold the modular Vanilla JavaScript architecture, structure the simulation trade-off formulas, and draft project documentation. All NASA DONKI telemetry and Canadian Space Agency (CSA) educational parameters were verified against official Space Apps challenge resources.
+In accordance with NASA Space Apps Challenge guidelines, generative AI (Gemini) was utilized during development to assist with scaffolding the modular Vanilla JavaScript architecture, structuring the resource trade-off formulas, and drafting project documentation. All scientific parameters and telemetry endpoints were verified against official NASA and Canadian Space Agency (CSA) challenge resources. No NASA logos or restricted branding elements are used in this application.

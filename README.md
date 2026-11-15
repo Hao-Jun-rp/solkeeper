@@ -135,3 +135,6 @@ pull main  →  make a branch  →  build in your folder  →  commit  →  push
 
 
 Happy building, Commander! 🚀
+
+## 🤖 Use of Super Intelligence (SI) Disclosure
+In accordance with NASA Space Apps guidelines, generative AI (Gemini) was used as a development assistant to help scaffold the modular Vanilla JavaScript architecture, structure the simulation trade-off formulas, and draft project documentation. All NASA DONKI telemetry and Canadian Space Agency (CSA) educational parameters were verified against official Space Apps challenge resources.
